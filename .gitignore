@@ -1,0 +1,12 @@
+# build output
+*.dll
+*.exe
+*.o
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
